@@ -1,12 +1,13 @@
 import React from 'react';
+import Calculator from '../calculator/calculator';
 
 
-function App() {
+const App = () => {
   return (
-    <>
-    hellow world
+    <main>
+      <Calculator/>
 
-    </>
+    </main>
   );
 }
 

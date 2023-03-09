@@ -1,0 +1,67 @@
+.calculatorWrapper {
+    padding: 4px;
+    background: #fff;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 6px;
+    max-width: 240px;
+    margin-bottom: 12px;
+}
+
+.calculatorDisplay {
+    margin: 0;
+    padding: 4px 8px;
+    text-align: end;
+    background: #f3f4f6;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 6px;
+    max-height: 52px;
+    color: #111827;
+    font-weight: 800;
+    font-size: 36px;
+    line-height: 44px;
+}
+
+.grayButton {
+    background: #ffffff;
+    border: 1px solid #e2e3e5;
+    border-radius: 6px;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 15px;
+    text-align: center;
+    color: #000000;
+}
+
+.operationsButton {
+    padding: 16px 0;
+}
+
+.operationsBlock {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8px;
+}
+
+.calculatorValues {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(4, 1fr);
+    gap: 8px;
+    direction: rtl;
+}
+
+.calculatorValues button:last-child {
+    grid-column: span 2;
+}
+
+.resultBtn {
+    padding: 25px 115px;
+    background: #5d5fef;
+    border-radius: 6px;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 15px;
+    text-align: center;
+    border: none;
+    color: #ffffff;
+}

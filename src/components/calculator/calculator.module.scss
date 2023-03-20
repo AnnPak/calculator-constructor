@@ -8,6 +8,11 @@
 }
 
 .calculatorDisplay {
+    display: flex;
+    align-items: center;
+    justify-content: right;
+    overflow: hidden;
+    padding: 8px 5px;
     margin: 0;
     padding: 4px 8px;
     text-align: end;
@@ -17,7 +22,7 @@
     max-height: 52px;
     color: #111827;
     font-weight: 800;
-    font-size: 36px;
+    font-size: 35px;
     line-height: 44px;
 }
 
@@ -64,4 +69,8 @@
     text-align: center;
     border: none;
     color: #ffffff;
+}
+
+.calculatorDisplayAnswer{
+    justify-content: left;
 }

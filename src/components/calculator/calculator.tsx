@@ -1,33 +1,36 @@
 import styles from "./calculator.module.scss";
 import classnames from "classnames";
 import { OPERATIONS, CALCULATOR_VALUES } from "../../utils/constants";
-import { useEffect, useState } from "react";
+import { changeCalcValue, getAnswer } from "../../redux/calculator";
+import { useAppSelector, useAppDispatch } from "../../redux/store";
 const Calculator = () => {
-  const calculatorValuesReverse = !!CALCULATOR_VALUES.length ? [...CALCULATOR_VALUES]?.reverse() : undefined;
-  const [calculatorValue, setCalculatorValue] = useState<string>('');
-  const [currentNumber, setCurrentNumber] = useState<string>('');
-  const [currentOperation, setCurrentOperation] = useState<string|null>(null);
+    const { currentValue, isAnswer } = useAppSelector((store) => store.calculatorReducer);
+    const dispatch = useAppDispatch();
 
-  const clickOnValue = (value:string) => {
-    setCalculatorValue(calculatorValue.concat(value));
-    setCurrentNumber(currentNumber.concat(value))
-  }
+    const calculatorValuesReverse = !!CALCULATOR_VALUES.length
+        ? [...CALCULATOR_VALUES]?.reverse()
+        : undefined;
+   
+    const buttonValueOnClick = (value: string) => {
+        dispatch(changeCalcValue(value));
+    };
 
-  useEffect(() => {
-    console.log(calculatorValue)
-  }, [calculatorValue])
-    
+    const buttonResult = () => {
+        dispatch(getAnswer());
+    };
+
+    const lengthCurrentValue = currentValue.length;
     return (
-        <>
+        <section>
             <div className={classnames(styles.calculatorWrapper, "p-4")}>
-                <p className={styles.calculatorDisplay}>{calculatorValue ? calculatorValue : 0}</p>
+                <p className={classnames(styles.calculatorDisplay, lengthCurrentValue >= 10  && isAnswer && styles.calculatorDisplayAnswer)}>{currentValue ? currentValue : 0}</p>
             </div>
             <div className={classnames(styles.calculatorWrapper, styles.operationsBlock, "p-4")}>
                 {Object.entries(OPERATIONS).map(([key, value]) => (
                     <button
                         className={classnames(styles.operationsButton, styles.grayButton)}
                         key={key}
-                        data-event={key}
+                        onClick={() => buttonValueOnClick(value)}
                     >
                         {value}
                     </button>
@@ -41,7 +44,7 @@ const Calculator = () => {
                             <button
                                 className={classnames(styles.operationsButton, styles.grayButton)}
                                 key={index}
-                                onClick ={() => clickOnValue(`${value}`)}
+                                onClick={() => buttonValueOnClick(`${value}`)}
                             >
                                 {value}
                             </button>
@@ -49,9 +52,11 @@ const Calculator = () => {
                     })}
             </div>
             <div className={classnames(styles.calculatorWrapper, "p-4")}>
-                <button className={styles.resultBtn}>=</button>
+                <button className={styles.resultBtn} onClick={() => buttonResult()}>
+                    =
+                </button>
             </div>
-        </>
+        </section>
     );
 };
 
